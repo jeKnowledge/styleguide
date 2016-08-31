@@ -1,2 +1,5 @@
-# styleguide
-Style guides for jeKnowledge projects
+# JeKnowledge Style Guides
+
+We have the following language/framework styleguides:
+
+* [Javascript](js)
