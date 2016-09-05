@@ -3,3 +3,4 @@
 We have the following language/framework styleguides:
 
 * [Javascript](js)
+* [Ruby](rb)
