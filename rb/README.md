@@ -6,7 +6,7 @@ We use [bbatsov Ruby Styleguide](https://github.com/bbatsov/ruby-style-guide) wi
 #### Source Code Layout
 
   - Use soft tabs set to 2 spaces.
-  
+
   - Prefer single-line class format for class declaration with no body.
 
   ```ruby
@@ -37,14 +37,14 @@ We use [bbatsov Ruby Styleguide](https://github.com/bbatsov/ruby-style-guide) wi
     e = M * c**2
   ```
 
-  - No spaces after (, [ or before ], ). Use spaces around { and before }. 
+  - No spaces after `(`, `[` or before `]`, `)`. Use spaces around `{` and before `}`. 
 
   ```ruby
     some(arg).other
     [1, 2, 3].each { |e| puts e }
   ```
 
-  - No space after !.
+  - No space after `!`.
 
   - Indent when as deep as case.
 
@@ -89,3 +89,128 @@ We use [bbatsov Ruby Styleguide](https://github.com/bbatsov/ruby-style-guide) wi
   # comment line
   # another comment line
   ```
+
+#### Syntax
+
+  - Use `::` only to reference constants
+
+  ```ruby
+  SomeClass.some_method
+  some_object.some_method
+  SomeModule::SomeClass::SOME_CONST
+  SomeModule::SomeClass()
+  ```
+
+  - Use parentheses around the arguments of method invocations.
+
+  - Omit parentheses for method calls with no arguments and methods that have a keyword status.
+
+  - Define optional arguments at the end of the list of arguments. 
+
+  ```ruby
+  def some_method(c, d, a = 1, b = 2)
+    puts "#{a}, #{b}, #{c}, #{d}"
+  end
+  ```
+
+  - Avoid the use of parallel assignment for defining variables
+
+  ```ruby
+  #bad
+  a, b, c, d = 'foo', 'bar', 'baz', 'foobar'
+
+  #good
+  a = 'foo'
+  b = 'bar'
+  c = 'baz'
+  d = 'foobar'
+  ```
+
+  - Do not use `for`, unless you know exactly why.
+
+  - Do not use `then` for multi-line `if`/`unless`.
+
+  - Favor ternary operator over `if/else/end` constructors.
+
+  ```ruby
+  result = some_condition ? something : something_else
+  ```
+
+  -  Leverage the fact that `if `and `case` are expressions which return a result.
+
+  ```ruby
+  result =
+    if condition
+      x
+    else
+      y
+    end
+  ```
+
+  - Do not use `unless` with `else`.
+
+  - Don't use parentheses around the conditions of `if/unless/while/until`.
+
+  - Use  Kerner#loop for infite loops.
+
+  - Omit the outer braces around an implicit options hash.
+
+  ```ruby
+  user.set(name: 'John', age: 45, permissions: { read: true })
+  ```
+
+  - Avoid `return` where not required for flow control.
+
+  ```ruby
+  def some_method(some_arr)
+    some_arr.size
+  end
+  ```
+
+  - Use shorthand self assignment operators whenever applicable.
+
+  ```ruby
+  # bad
+  x = x + y
+  x = x * y
+  x = x**y
+  x = x / y
+  x = x || y
+  x = x && y
+
+  # good
+  x += y
+  x *= y
+  x **= y
+  x /= y
+  x ||= y
+  x &&= y
+  ```
+
+  - Use `||=` to initialize variables only if they're not already initialized.
+ 
+ ```ruby
+  # bad
+  name = name ? name : 'Bozhidar'
+  # good - set name to 'Bozhidar', only if it's nil or false
+  name ||= 'Bozhidar
+ ```
+ 
+- Don't use `||=` to initialize boolean variables.
+ 
+- Do not put a space between a method name and the opening parenthesis.
+ 
+- Do not use nested method definitions.
+ 
+- Use the new lambda literal syntax for single line body blocks. Use the `lambda` method for multi-line blocks.
+
+ ```ruby
+  l = ->(a, b) { a + b }
+  l.call(1, 2)
+
+  l = lambda do |a, b|
+    tmp = a * 7
+    tmp * b / 50
+  end
+ ```
+
